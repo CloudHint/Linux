@@ -1,15 +1,17 @@
 #!/bin/bash
 
-#installbackup
-#sudoaptinstalltimeshift
+# Installbackup
+if [ -z "$(which timeshift)" ]; then
+sudo apt install timeshift
+fi
 
-#installgit
-#sudoapt-getinstallgit
-
-#sudoaptinstallopenssh-server-y
-#systemctlsshdstatus
-#systemctlrestartsshd.service
-#systemctlstatussshd.service
+# Install ssh
+if [ -z "$(which sshd)" ]; then
+sudo apt install openssh-server -y
+systemctl sshd status
+systemctl restart sshd.service
+systemctl status sshd.service
+fi
  
 # Install terraform on linux if it is not installed
 if [ -z "$(which terraform)" ]; then
